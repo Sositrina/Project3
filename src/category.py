@@ -1,5 +1,7 @@
 from src.product import Product
 
+from typing import List
+
 
 class Category:
     """
@@ -12,11 +14,10 @@ class Category:
             category_count (int): Счетчик количества созданных категорий (классовый атрибут)
             product_count (int): Счетчик общего количества товаров во всех категориях (классовый атрибут)
         """
-    name: str  # название категории
-    description: str  # описание категории
-    products: list  # список
-    category_count: int = 0  # количество категорий
-    product_count: int = 0  # количество товаров
+    name: str
+    description: str
+    category_count: int = 0
+    product_count: int = 0
 
     def __init__(self, name: str, description: str, products: list) -> None:
         """
@@ -28,10 +29,24 @@ class Category:
         """
         self.name = name
         self.description = description
-        self.products = products
+        self.__products = products
         Category.category_count += 1
-        Category.product_count = len(products)
+        Category.product_count += len(products)
 
+
+    def add_product(self, product4: Product) -> None:
+        """Добавляет продукты в категорию и добавляет количество продуктов"""
+        self.__products.append(product4)
+        Category.product_count += 1
+
+    @property
+    def products(self) -> List[str]:
+        """Выводит список товаров в виде строк"""
+        formatted_products = []
+        for product in self.__products:
+            formatted_str = f"{product.name}, {product.price} руб. Остаток: {product.quantity} шт.\n"
+            formatted_products.append(formatted_str)
+        return formatted_products
 
 if __name__ == "__main__":
     product1 = Product("Samsung Galaxy S23 Ultra",
@@ -91,3 +106,10 @@ if __name__ == "__main__":
 
     print(Category.category_count)
     print(Category.product_count)
+
+    print(category1.products)
+    product4 = Product("55\" QLED 4K", "Фоновая подсветка", 123000.0, 7)
+    category1.add_product(product4)
+    print(category1.products)
+    print(category1.product_count)
+
