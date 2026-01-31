@@ -1,4 +1,5 @@
 from src.product import Product
+from src.category import Category
 
 
 def test_product(first_product: Product) -> None:
@@ -35,3 +36,18 @@ def test_new_product_with_different_data() -> None:
     data2 = {"name": "Product2", "description": "Desc2", "price": 50.0, "quantity": 0}
     product2 = Product.new_product(data2)
     assert product2.quantity == 0
+
+def test_product_str() -> None:
+    product = Product("Тест", "Описание", 80, 15)
+    assert str(product) == "Тест, 80 руб. Остаток: 15 шт."
+
+def test_product_add() -> None:
+    a = Product("A", "Описание", 100, 10)
+    b = Product("B", "Описание", 200, 2)
+    assert a + b == 1400
+
+def test_category_str() -> None:
+    p1 = Product("A", "Описание", 100, 5)
+    p2 = Product("B", "Описание", 200, 3)
+    category = Category("Тестовая", "Описание", [p1, p2])
+    assert str(category) == "Тестовая, количество продуктов: 8 шт."

@@ -42,11 +42,14 @@ class Category:
     @property
     def products(self) -> List[str]:
         """Выводит список товаров в виде строк"""
-        formatted_products = []
+        return [str(product) for product in self.__products]
+
+    def __str__(self) -> str:
+        total_quantity = 0
         for product in self.__products:
-            formatted_str = f"{product.name}, {product.price} руб. Остаток: {product.quantity} шт.\n"
-            formatted_products.append(formatted_str)
-        return formatted_products
+            total_quantity += product.quantity
+        return f"{self.name}, количество продуктов: {total_quantity} шт."
+
 
 if __name__ == "__main__":
     product1 = Product("Samsung Galaxy S23 Ultra",
@@ -112,4 +115,7 @@ if __name__ == "__main__":
     category1.add_product(product4)
     print(category1.products)
     print(category1.product_count)
+    print(category1)
+    print(category2)
+    print(category1.products)
 

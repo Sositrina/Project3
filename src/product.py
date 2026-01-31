@@ -38,6 +38,12 @@ class Product:
         else:
             self.__price = value
 
+    def __str__(self) -> str:
+        return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт."
+
+    def __add__(self, other: "Product") -> float:
+        return self.price * self.quantity + other.price * other.quantity
+
 
 if __name__ == "__main__":
     new_product = Product.new_product(
@@ -60,3 +66,9 @@ if __name__ == "__main__":
     print(new_product.price)
     new_product.price = 0
     print(new_product.price)
+    print(new_product)
+
+    a = Product("Товар A", "Описание", 100, 10)
+    b = Product("Товар B", "Описание", 200, 2)
+
+    print(a + b)
