@@ -90,3 +90,11 @@ def test_category_with_single_product() -> None:
     assert len(category.products) == 1
     assert "Монитор" in category.products[0]
     assert "15000" in category.products[0]
+
+
+def test_add_invalid_product_simple() -> None:
+    """Проверяет, что метод add_product выбрасывает TypeError"""
+    category = Category("Тестовая", "Описание", [])
+
+    with pytest.raises(TypeError):
+        category.add_product("не продукт")

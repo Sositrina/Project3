@@ -1,19 +1,20 @@
-from src.product import Product
-
 from typing import List
+
+from src.product import Product
 
 
 class Category:
     """
-        Класс, представляющий категорию товаров в магазине.
+    Класс, представляющий категорию товаров в магазине.
 
-        Атрибуты:
-            name (str): Название категории
-            description (str): Описание категории
-            products (list): Список товаров в категории
-            category_count (int): Счетчик количества созданных категорий (классовый атрибут)
-            product_count (int): Счетчик общего количества товаров во всех категориях (классовый атрибут)
-        """
+    Атрибуты:
+        name (str): Название категории
+        description (str): Описание категории
+        products (list): Список товаров в категории
+        category_count (int): Счетчик количества созданных категорий (классовый атрибут)
+        product_count (int): Счетчик общего количества товаров во всех категориях (классовый атрибут)
+    """
+
     name: str
     description: str
     category_count: int = 0
@@ -33,10 +34,11 @@ class Category:
         Category.category_count += 1
         Category.product_count += len(products)
 
-
-    def add_product(self, product4: Product) -> None:
+    def add_product(self, product: Product) -> None:
         """Добавляет продукты в категорию и добавляет количество продуктов"""
-        self.__products.append(product4)
+        if not isinstance(product, Product):
+            raise TypeError("Можно добавлять только объекты Product или его наследников")
+        self.__products.append(product)
         Category.product_count += 1
 
     @property
@@ -52,20 +54,11 @@ class Category:
 
 
 if __name__ == "__main__":
-    product1 = Product("Samsung Galaxy S23 Ultra",
-                       "256GB, Серый цвет, 200MP камера",
-                       180000.0,
-                       5)
+    product1 = Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5)
 
-    product2 = Product("Iphone 15",
-                       "512GB, Gray space",
-                       210000.0,
-                       8)
+    product2 = Product("Iphone 15", "512GB, Gray space", 210000.0, 8)
 
-    product3 = Product("Xiaomi Redmi Note 11",
-                       "1024GB, Синий",
-                       31000.0,
-                       14)
+    product3 = Product("Xiaomi Redmi Note 11", "1024GB, Синий", 31000.0, 14)
 
     print(product1.name)
     print(product1.description)
@@ -84,8 +77,7 @@ if __name__ == "__main__":
 
     category1 = Category(
         "Смартфоны",
-        "Смартфоны, как средство не только коммуникации,"
-        "но и получения дополнительных функций для удобства жизни",
+        "Смартфоны, как средство не только коммуникации," "но и получения дополнительных функций для удобства жизни",
         [product1, product2, product3],
     )
 
@@ -111,11 +103,10 @@ if __name__ == "__main__":
     print(Category.product_count)
 
     print(category1.products)
-    product4 = Product("55\" QLED 4K", "Фоновая подсветка", 123000.0, 7)
+    product4 = Product('55" QLED 4K', "Фоновая подсветка", 123000.0, 7)
     category1.add_product(product4)
     print(category1.products)
     print(category1.product_count)
     print(category1)
     print(category2)
     print(category1.products)
-

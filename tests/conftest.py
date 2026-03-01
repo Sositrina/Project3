@@ -23,3 +23,10 @@ def first_category() -> Category:
             Product("Xiaomi Redmi Note 11", "1024GB, Синий", 31000.0, 14),
         ],
     )
+
+@pytest.fixture(autouse=True)
+def reset_product_count():
+    """Сброс счетчика продуктов перед каждым тестом"""
+    Category.product_count = 0
+    yield
+    Category.product_count = 0
