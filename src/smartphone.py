@@ -33,3 +33,7 @@ class Smartphone(Product):
         self.model = model
         self.memory = memory
         self.color = color
+
+    def hand_over(self):
+        return (f"Продукт: {self.name}, Описание: {self.description}, Цена: {self.price}, Количество: {self.quantity},"
+                f"Производительность: {self.efficiency}, Модель: {self.model}, Память: {self.memory}, Цвет: {self.color}")

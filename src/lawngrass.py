@@ -30,3 +30,6 @@ class LawnGrass(Product):
         self.country = country
         self.germination_period = germination_period
         self.color = color
+
+    def hand_over(self):
+        return f"{self.name}, {self.description}, {self.price}, {self.quantity}"

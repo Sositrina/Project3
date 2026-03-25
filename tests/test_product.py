@@ -73,3 +73,13 @@ def test_add_different_classes_raises_type_error() -> None:
 
     with pytest.raises(TypeError) as e:
         phone + grass
+
+
+def test_mixin_repr(capsys):
+    """Проверка работы миксина"""
+    product = Product("Продукт", "Описание", 100, 5)
+
+    captured = capsys.readouterr()
+    assert "Product(Продукт, Описание, 100, 5)" in captured.out
+
+    assert repr(product) == "Product(Продукт, Описание, 100, 5)"

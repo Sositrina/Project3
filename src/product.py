@@ -1,19 +1,17 @@
 from typing import Any, Dict
+from src.BaseProduct import BaseProduct
+from src.mixin import Mixin
 
 
-class Product:
+class Product(Mixin, BaseProduct):
     """Класс содержит название продукта, описание, цена и количество"""
 
-    name: str
-    description: str
-    # price: float
-    quantity: int
-
     def __init__(self, name: str, description: str, price: float, quantity: int) -> None:
-        self.name = name  # название продукта
-        self.description = description  # описание
-        self.__price = price  # цена
-        self.quantity = quantity  # количество в наличии
+        super().__init__(name, description, price, quantity)
+
+    def hand_over(self):
+        return f"Продукт: {self.name}, Описание: {self.description}, Цена: {self.price}, Количество: {self.quantity}"
+
 
     @classmethod
     def new_product(cls, product_data: Dict[str, Any]) -> "Product":
@@ -25,18 +23,6 @@ class Product:
             quantity=product_data["quantity"],
         )
 
-    @property
-    def price(self) -> float:
-        """Геттер для цены"""
-        return self.__price
-
-    @price.setter
-    def price(self, value: float) -> None:
-        """Сеттер для цены"""
-        if value <= 0:
-            print("Цена не должна быть нулевая или отрицательная")
-        else:
-            self.__price = value
 
     def __str__(self) -> str:
         return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт."
