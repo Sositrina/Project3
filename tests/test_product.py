@@ -38,8 +38,9 @@ def test_new_product_with_different_data() -> None:
     assert product1.quantity == 10
 
     data2 = {"name": "Product2", "description": "Desc2", "price": 50.0, "quantity": 0}
-    product2 = Product.new_product(data2)
-    assert product2.quantity == 0
+
+    with pytest.raises(ValueError):
+        Product.new_product(data2)
 
 
 def test_product_str() -> None:

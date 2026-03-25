@@ -52,6 +52,21 @@ class Category:
             total_quantity += product.quantity
         return f"{self.name}, количество продуктов: {total_quantity} шт."
 
+    def average_price_of_goods(self):
+        """Cредний ценник всех товаров"""
+        try:
+            total_price = 0
+            for product in self.__products:
+                total_price += product.price
+
+            return total_price / len(self.__products)
+
+        except ZeroDivisionError:
+            return 0
+
+
+
+
 
 if __name__ == "__main__":
     product1 = Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5)
@@ -110,3 +125,4 @@ if __name__ == "__main__":
     print(category1)
     print(category2)
     print(category1.products)
+    print(category1.average_price_of_goods())
