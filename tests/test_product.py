@@ -84,3 +84,19 @@ def test_mixin_repr(capsys):
     assert "Product(Продукт, Описание, 100, 5)" in captured.out
 
     assert repr(product) == "Product(Продукт, Описание, 100, 5)"
+
+def test_product_zero_quantity():
+    with pytest.raises(ValueError):
+        Product("Test", "Описание", 100, 0)
+
+def test_product_str_representation():
+    product = Product(
+        name="Samsung Galaxy S23 Ultra",
+        description="256GB, Серый цвет, 200MP камера",
+        price=180000.0,
+        quantity=5
+    )
+    s = str(product)
+
+    expected = "Samsung Galaxy S23 Ultra, 180000.0 руб. Остаток: 5 шт."
+    assert s == expected

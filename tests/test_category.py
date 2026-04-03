@@ -98,3 +98,37 @@ def test_add_invalid_product_simple() -> None:
 
     with pytest.raises(TypeError):
         category.add_product("не продукт")
+
+def test_average_price_empty():
+    """Проверяет, что при отсутствии товаров средняя цена равна 0"""
+    category = Category("Пусто", "Описание", [])
+
+    assert category.average_price_of_goods() == 0
+
+def test_category_str_empty():
+    """Пустая категория"""
+    category = Category("Пусто", "Описание", [])
+    assert str(category) == "Пусто, количество продуктов: 0 шт."
+
+def test_product_creation():
+    """Проверка создания продукта и его полей"""
+    product1 = Product(
+        "Samsung Galaxy S23 Ultra",
+        "256GB, Серый цвет, 200MP камера",
+        180000.0,
+        5
+    )
+
+    assert product1.name == "Samsung Galaxy S23 Ultra"
+    assert product1.description == "256GB, Серый цвет, 200MP камера"
+    assert product1.price == 180000.0
+    assert product1.quantity == 5
+
+def test_average_price_of_goods():
+    """Проверка суммирования цен всех товаров"""
+    product1 = Product("iPhone", "Телефон", 1000, 2)
+    product2 = Product("Samsung", "Телефон", 2000, 3)
+
+    category = Category("Смартфоны", "Описание", [product1, product2])
+
+    assert category.average_price_of_goods() == 1500
