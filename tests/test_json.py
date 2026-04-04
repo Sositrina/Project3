@@ -1,8 +1,6 @@
-import pytest
 from unittest.mock import patch, mock_open
 from src.utils import read_json, create_objects_from_json
 from src.category import Category
-from src.product import Product
 
 def test_read_json():
     fake_data = [{"name": "TestCat", "description": "Desc", "products": []}]
@@ -11,7 +9,7 @@ def test_read_json():
         result = read_json("fake_path.json")
 
     assert result == fake_data
-    m.assert_called_once()  # Проверяем вызов open
+    m.assert_called_once()
 
 def test_create_objects_from_json():
     fake_data = [
