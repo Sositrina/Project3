@@ -79,3 +79,18 @@ def test_lawngrass_addition() -> None:
     )
 
     assert lawn_grass1 + lawn_grass2 == (1500.0 * 10 + 2000.0 * 5)
+
+
+def test_lawngrass_hand_over():
+    grass = LawnGrass(
+        name="Газонная трава",
+        description="Зелёная и густая",
+        price=150.0,
+        quantity=10,
+        country="Россия",
+        germination_period=7.0,
+        color="Зелёный"
+    )
+
+    expected = "Газонная трава, Зелёная и густая, 150.0, 10"
+    assert grass.hand_over() == expected

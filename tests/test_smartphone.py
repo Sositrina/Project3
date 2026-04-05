@@ -56,6 +56,7 @@ def test_smartphone_str() -> None:
         color="Серый"
     )
 
+
     assert str(smartphone) == "iPhone 15, 210000.0 руб. Остаток: 8 шт."
 
 
@@ -83,4 +84,4 @@ def test_smartphone_addition() -> None:
         color="Черный"
     )
 
-    assert smartphone1 + smartphone2 == (210000.0 * 5 + 180000.0 * 3)  # цена * количество
+    assert smartphone1 + smartphone2 == (210000.0 * 5 + 180000.0 * 3)
